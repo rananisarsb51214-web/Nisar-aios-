@@ -172,11 +172,11 @@ This project is currently **not specified** with a license. Please refer to the 
 
 ---
 
-_© 2023 NisarAI Studio. All rights reserved._
+_© 2023 NisarAI-os. All rights reserved._
 
 - **Repository:** [rananisarsb51214-web/Nisar-aios-](https://github.com/rananisarsb51214-web/Nisar-aios-)
 - **Author:** rananisarsb51214-web
-- **Contact:** [rananisarsb51214-web@example.com](mailto:rananisarsb51214-web@example.com)
+- **Contact:** [rananisarsb51214-nisaraios)
 
 **Show your support!** ⭐ Star | 🍴 Fork | ⚠️ Issues
 
