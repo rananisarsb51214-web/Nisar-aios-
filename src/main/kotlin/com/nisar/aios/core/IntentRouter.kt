@@ -13,6 +13,12 @@ import com.nisar.aios.utils.Result
  *
  * This layer provides clean separation between user input parsing and tool execution.
  *
+ * Current implementation uses simple heuristics (lowercase normalization).
+ * Production deployments can integrate:
+ * - LiteRT-LM for semantic understanding
+ * - Custom NLU models
+ * - Regex patterns for domain-specific commands
+ *
  * @param registry The tool registry used for routing
  * @see BaseTool
  * @see ToolRegistry
@@ -25,8 +31,7 @@ class IntentRouter(private val registry: ToolRegistry) {
      *
      * For now, uses simple heuristics:
      * - Lowercase the input
-     * - Extract the first meaningful phrase
-     * - Match against registered tools
+     * - Trim whitespace
      *
      * In production, this could integrate with LiteRT-LM or a dedicated NLU service.
      *
@@ -34,15 +39,8 @@ class IntentRouter(private val registry: ToolRegistry) {
      * @return The extracted intent string
      */
     fun extractIntent(userMessage: String): String {
-        // Trim and normalize
         val normalized = userMessage.trim().lowercase()
-        if (normalized.isEmpty()) {
-            return "unknown"
-        }
-
-        // Return the normalized message as the intent for now
-        // In production, use more sophisticated parsing
-        return normalized
+        return if (normalized.isEmpty()) "unknown" else normalized
     }
 
     /**
@@ -58,8 +56,7 @@ class IntentRouter(private val registry: ToolRegistry) {
      */
     fun routeToTool(userMessage: String): BaseTool? {
         val intent = extractIntent(userMessage)
-        val tool = registry.findTool(intent)
-        return tool
+        return registry.findTool(intent)
     }
 
     /**
